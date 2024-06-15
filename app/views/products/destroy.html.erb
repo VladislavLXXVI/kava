@@ -1,0 +1,24 @@
+<!-- app/views/products/destroy.html.erb -->
+
+<h1>Delete Product</h1>
+
+<p>Are you sure you want to delete the following product?</p>
+
+<div>
+  <strong>Name:</strong> <%= @product.name %><br>
+  <strong>Description:</strong> <%= @product.description %><br>
+  <strong>Price:</strong> <%= number_to_currency(@product.price) %><br>
+</div>
+
+<% if @product.image.present? %>
+  <div>
+    <strong>Image:</strong><br>
+    <%= image_tag url_for(@product.image), alt: "Product Image", size: "150x150" %>
+  </div>
+<% end %>
+
+<%= form_with(url: product_path(@product), method: :delete) do %>
+  <%= button_to 'Confirm Delete', product_path(@product), method: :delete, class: 'btn btn-danger' %>
+<% end %>
+
+<%= link_to 'Cancel', products_path, class: 'btn btn-primary' %>
